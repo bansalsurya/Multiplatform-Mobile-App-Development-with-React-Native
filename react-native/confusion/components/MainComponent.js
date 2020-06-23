@@ -24,6 +24,9 @@ function RootMenuNavigator() {
           color: '#fff',
         },
       }}
+      drawerStyle={{
+        backgroundColor: '#D1C4E9',
+      }}
     >
       <MenuNavigator.Screen name='Menu' component={Menu} />
       <MenuNavigator.Screen name='Dishdetail' component={Dishdetail} />
