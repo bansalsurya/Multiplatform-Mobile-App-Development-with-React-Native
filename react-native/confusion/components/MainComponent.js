@@ -8,6 +8,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Menu from './MenuComponent';
 import Dishdetail from './DishdetailComponent';
 import Home from './HomeComponent';
+import Contact from './ContactComponent';
+import About from './AboutComponent';
 
 const MenuNavigator = createStackNavigator();
 
@@ -54,6 +56,47 @@ function RootHomeNavigator() {
   );
 }
 
+const ContactNavigator = createStackNavigator();
+
+function RootContactNavigator() {
+  return (
+    <ContactNavigator.Navigator
+      initialRouteName='Contact'
+      screenOptions={({ navigation }) => ({
+        headerStyle: {
+          backgroundColor: '#512DA8',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          color: '#fff',
+        },
+      })}
+    >
+      <ContactNavigator.Screen name='Contact' component={Contact} />
+    </ContactNavigator.Navigator>
+  );
+}
+const AboutNavigator = createStackNavigator();
+
+function RootAboutNavigator() {
+  return (
+    <AboutNavigator.Navigator
+      initialRouteName='about'
+      screenOptions={({ navigation }) => ({
+        headerStyle: {
+          backgroundColor: '#512DA8',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          color: '#fff',
+        },
+      })}
+    >
+      <AboutNavigator.Screen name='About' component={About} />
+    </AboutNavigator.Navigator>
+  );
+}
+
 const MainNavigator = createDrawerNavigator();
 
 function RootMainNavigator() {
@@ -65,9 +108,19 @@ function RootMainNavigator() {
         options={{ title: 'Home', drawerLabel: 'Home' }}
       />
       <MainNavigator.Screen
+        name='About'
+        component={RootAboutNavigator}
+        options={{ title: 'About Us', drawerLabel: 'About Us' }}
+      />
+      <MainNavigator.Screen
         name='Menu'
         component={RootMenuNavigator}
         options={{ title: 'Menu', drawerLabel: 'Menu' }}
+      />
+      <MainNavigator.Screen
+        name='Contact'
+        component={RootContactNavigator}
+        options={{ title: 'Contact Us', drawerLabel: 'Contact Us' }}
       />
     </MainNavigator.Navigator>
   );
