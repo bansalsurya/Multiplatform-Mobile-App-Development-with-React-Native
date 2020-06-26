@@ -22,6 +22,8 @@ import Dishdetail from './DishdetailComponent';
 import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
+import Reservation from './ReservationComponent';
+
 import { connect } from 'react-redux';
 import {
   fetchDishes,
@@ -41,6 +43,34 @@ const mapDispatchToProps = (dispatch) => ({
   fetchLeaders: () => dispatch(fetchLeaders()),
 });
 
+const ReservationNavigator = createStackNavigator();
+function RootReservationNavigator() {
+  return (
+    <ReservationNavigator.Navigator
+      initialRouteName='Reservation'
+      screenOptions={({ navigation }) => ({
+        headerStyle: {
+          backgroundColor: '#512DA8',
+        },
+        headerTitleStyle: {
+          color: '#fff',
+        },
+        headerTintColor: '#fff',
+        headerLeft: (props) => (
+          <Icon
+            {...props}
+            name='menu'
+            size={24}
+            iconStyle={{ color: 'white' }}
+            onPress={() => navigation.DrawerToggle()}
+          />
+        ),
+      })}
+    >
+      <ReservationNavigator.Screen name='Reservation' component={Reservation} />
+    </ReservationNavigator.Navigator>
+  );
+}
 const MenuNavigator = createStackNavigator();
 
 function RootMenuNavigator() {
@@ -243,6 +273,22 @@ function RootMainNavigator() {
               type='font-awesome'
               size={22}
               color={tintColor}
+            />
+          ),
+        }}
+      />
+      <MainNavigator.Screen
+        name='Reservation'
+        component={RootReservationNavigator}
+        options={{
+          title: 'Reserve Table',
+          drawerLabel: 'Reserve Table',
+          drawerIcon: ({ tintColor, focused }) => (
+            <Icon
+              name='cutlery'
+              type='font-awesome'
+              size={24}
+              iconStyle={{ color: tintColor }}
             />
           ),
         }}
