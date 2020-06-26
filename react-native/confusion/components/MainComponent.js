@@ -251,7 +251,7 @@ function RootMainNavigator() {
   );
 }
 
-class MainComponent extends Component {
+class Main extends Component {
   componentDidMount() {
     this.props.fetchDishes();
     this.props.fetchComments();
@@ -294,4 +294,4 @@ const styles = StyleSheet.create({
     height: 60,
   },
 });
-export default connect(mapStateToProps, mapDispatchToProps)(MainComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

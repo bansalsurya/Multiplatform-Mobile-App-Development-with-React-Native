@@ -8,18 +8,19 @@ import { Loading } from './LoadingComponent';
 const mapStateToProps = (state) => {
   return {
     dishes: state.dishes,
+    comments: state.comments,
     promotions: state.promotions,
     leaders: state.leaders,
   };
 };
-
-function RenderItems({ item, isLoading, errMess }) {
-  if (isLoading) {
+const RenderItem = (props) => {
+  const item = props.item;
+  if (props.isLoading) {
     return <Loading />;
-  } else if (errMess) {
+  } else if (props.errMess) {
     return (
       <View>
-        <Text>{errMess}</Text>
+        <Text>{props.errMess}</Text>
       </View>
     );
   } else {
@@ -37,7 +38,7 @@ function RenderItems({ item, isLoading, errMess }) {
       return <View></View>;
     }
   }
-}
+};
 class Home extends Component {
   static screenOptions = {
     title: 'Home',
@@ -46,26 +47,26 @@ class Home extends Component {
   render() {
     return (
       <ScrollView>
-        <RenderItems
+        <RenderItem
           item={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
-          isLoading={this.props.dishes.isLoading}
-          errMess={this.props.dishes.errMess}
+          isLoading={this.props.dishes.dishes.isLoading}
+          errMess={this.props.dishes.dishes.errMess}
         />
-        <RenderItems
+        <RenderItem
           item={
             this.props.promotions.promotions.filter(
               (promo) => promo.featured
             )[0]
           }
-          isLoading={this.props.promotions.isLoading}
-          errMess={this.props.promotions.errMess}
+          isLoading={this.props.promotions.promotions.isLoading}
+          errMess={this.props.promotions.promotions.errMess}
         />
-        <RenderItems
+        <RenderItem
           item={
             this.props.leaders.leaders.filter((leader) => leader.featured)[0]
           }
-          isLoading={this.props.leaders.isLoading}
-          errMess={this.props.leaders.errMess}
+          isLoading={this.props.leaders.leaders.isLoading}
+          errMess={this.props.leaders.leaders.errMess}
         />
       </ScrollView>
     );
