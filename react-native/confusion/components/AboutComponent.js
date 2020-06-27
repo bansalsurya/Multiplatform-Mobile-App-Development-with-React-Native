@@ -61,12 +61,12 @@ export class About extends Component {
           </Card>
         </ScrollView>
       );
-    } else if (this.props.leaders.errMess) {
+    } else if (this.props.leaders.leaders.errMess) {
       return (
         <ScrollView>
           <History />
           <Card title='Corporate Leadership'>
-            <Text>{this.props.leaders.errMess}</Text>
+            <Text>{this.props.leaders.leaders.errMess}</Text>
           </Card>
         </ScrollView>
       );
@@ -78,7 +78,7 @@ export class About extends Component {
             <FlatList
               data={this.props.leaders.leaders}
               renderItem={renderLeader}
-              keyExtractor={({ item }) => item.id.toString()}
+              keyExtractor={(item) => item.id.toString()}
             />
           </Card>
         </ScrollView>

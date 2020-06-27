@@ -1,14 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 
-const LoadingComponent = () => {
-  return (
-    <View style={styles.loadingView}>
-      <ActivityIndicator size='large' color='#512DA8' />
-      <Text style={styles.loadingText}>Loading . . .</Text>
-    </View>
-  );
-};
 const styles = StyleSheet.create({
   loadingView: {
     alignItems: 'center',
@@ -21,4 +13,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-export default LoadingComponent;
+
+export const Loading = () => {
+  return (
+    <View style={styles.loadingView}>
+      <ActivityIndicator size='large' color='#512DA8' />
+      <Text style={styles.loadingText}>Loading . . .</Text>
+    </View>
+  );
+};

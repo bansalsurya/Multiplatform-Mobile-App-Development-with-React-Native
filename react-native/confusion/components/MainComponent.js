@@ -62,7 +62,7 @@ function RootReservationNavigator() {
             name='menu'
             size={24}
             iconStyle={{ color: 'white' }}
-            onPress={() => navigation.DrawerToggle()}
+            onPress={() => navigation.toggleDrawer()}
           />
         ),
       })}
