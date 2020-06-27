@@ -50,7 +50,7 @@ function RenderDish(props) {
           type='font-awesome'
           color='#512DA8'
           onPress={() => {
-            this.toggleModal();
+            props.toggleModal();
           }}
         />
       </Card>
@@ -136,6 +136,7 @@ class Dishdetail extends Component {
           dish={this.props.dishes.dishes[+dishId]}
           favorite={this.props.favorites.some((el) => el === dishId)}
           onPress={() => this.markFavorite(dishId)}
+          toggleModal={() => this.toggleModal()}
         />
         <RenderComments
           comments={this.props.comments.comments.filter(
