@@ -8,9 +8,11 @@ import { leaders } from './leaders';
 import { favorites } from './favorites';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/es/storage';
+//import { AsyncStorage } from 'react-native';
 export const ConfigureStore = () => {
   const config = {
     key: 'root',
+    // storage: AsyncStorage,
     storage,
     debug: true,
   };
