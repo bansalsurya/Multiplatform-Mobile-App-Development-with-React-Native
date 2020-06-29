@@ -5,6 +5,7 @@ import { baseUrl } from '../shared/baseUrl';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as SecureStore from 'expo-secure-store';
+import * as ImageManipulator from 'expo-image-manipulator';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 class LoginTab extends Component {
@@ -152,21 +153,19 @@ class RegisterTab extends Component {
       });
       if (!capturedImage.cancelled) {
         console.log(capturedImage);
-        this.setState({ imageUrl: capturedImage.uri });
+        this.processImage(capturedImage.uri);
       }
     }
   };
 
-  static screenOptions = {
-    title: 'Register',
-    tabBarIcon: ({ tintColor, focused }) => (
-      <Icon
-        name='user-plus'
-        type='font-awesome'
-        size={24}
-        iconStyle={{ color: tintColor }}
-      />
-    ),
+  processImage = async (imageUri) => {
+    let processedImage = await ImageManipulator.manipulate(
+      imageUri,
+      [{ resize: { width: 400 } }],
+      { format: 'png' }
+    );
+    console.log(processedImage);
+    this.setState({ imageUrl: processedImage.uri });
   };
 
   handleRegister() {
