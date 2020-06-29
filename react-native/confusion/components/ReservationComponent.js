@@ -103,7 +103,7 @@ class Reservation extends Component {
     let startDate = new Date(dateMs);
     let endDate = new Date(dateMs + 2 * 60 * 60 * 1000);
 
-    await Calendar.createEventAsync(Calendar.DEFAULT, {
+    const newCalendarID = await Calendar.createCalendarAsync({
       title: 'Con Fusion Table Reservation',
       startDate: startDate,
       endDate: endDate,
@@ -111,6 +111,7 @@ class Reservation extends Component {
       location:
         '121, Clear Water Bay Road, Clear Water Bay, Kowloon, Hong Kong',
     });
+    console.log(`Your new calendar ID is: ${newCalendarID}`);
   }
 
   async presentLocalNotification(date) {
