@@ -234,7 +234,7 @@ class Dishdetail extends Component {
             <Input
               placeholder='Author'
               leftIcon={
-                <Icon type='font-awesome' name={'user'} color='black' />
+                <Icon type='font-awesome' name={'user-o'} color='black' />
               }
               style={styles.formRow}
               onChangeText={(value) => this.setState({ comment: value })}
@@ -244,7 +244,7 @@ class Dishdetail extends Component {
             <Input
               placeholder='Comment'
               leftIcon={
-                <Icon type='font-awesome' name={'comment'} color='black' />
+                <Icon type='font-awesome' name={'comment-o'} color='black' />
               }
               style={styles.formRow}
               onChangeText={(value) => this.setState({ author: value })}
