@@ -7,12 +7,12 @@ import {
   Picker,
   Switch,
   Button,
-  Modal,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import DatePicker from 'react-native-datepicker';
 import * as Permissions from 'expo-permissions';
 import * as Notifications from 'expo-notifications';
+import * as Calendar from 'expo-calendar';
 class Reservation extends Component {
   constructor(props) {
     super(props);
@@ -59,12 +59,28 @@ class Reservation extends Component {
           text: 'OK',
           onPress: () => {
             this.presentLocalNotification(this.state.date);
+            this.addReservationToCalendar(this.state.date);
             this.resetForm();
           },
         },
       ],
       { cancelable: false }
     );
+  }
+
+  async obtainCalendarPermission() {
+    const calendarPermission = await Calendar.requestCalendarPermissionsAsync(
+      Permissions.CALENDAR
+    );
+    if (calendarPermission.status !== 'granted') {
+      const calendarPermission = await Calendar.requestCalendarPermissionsAsync(
+        Permissions.CALENDAR
+      );
+      if (calendarPermission.status !== 'granted') {
+        Alert.alert('Permission not granted to access the calendar ');
+      }
+    }
+    return calendarPermission;
   }
   async obtainNotificationPermission() {
     let permission = await Permissions.getAsync(
@@ -79,6 +95,22 @@ class Reservation extends Component {
       }
     }
     return permission;
+  }
+  async addReservationToCalendar(date) {
+    await this.obtainCalendarPermission();
+
+    let dateMs = Date.parse(date);
+    let startDate = new Date(dateMs);
+    let endDate = new Date(dateMs + 2 * 60 * 60 * 1000);
+
+    await Calendar.createEventAsync(Calendar.DEFAULT, {
+      title: 'Con Fusion Table Reservation',
+      startDate: startDate,
+      endDate: endDate,
+      timeZone: 'Asia/Hong_Kong',
+      location:
+        '121, Clear Water Bay Road, Clear Water Bay, Kowloon, Hong Kong',
+    });
   }
 
   async presentLocalNotification(date) {
@@ -96,6 +128,7 @@ class Reservation extends Component {
       },
     });
   }
+
   render() {
     return (
       <Animatable.View animation='zoomIn' duration={2000} delay={1000}>
